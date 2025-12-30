@@ -59,7 +59,7 @@ module.exports = {
       },
       backgroundImage: {
         "hero-background": "url('./img/HeroBackground.jpg')",
-        "side-bar-background": "url('./img/SideBarBackground.jpg')",
+        "side-bar-background": "linear-gradient(135deg, #fef7ee 0%, #f8b96d 50%, #f27a0a 100%)",
         "gradient-primary": "linear-gradient(135deg, #f27a0a 0%, #e35e00 100%)",
         "gradient-secondary": "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
         "gradient-accent": "linear-gradient(135deg, #d946ef 0%, #c026d3 100%)",

@@ -87,9 +87,9 @@ const SideBar = () => {
       <div
         className={`${
           isShow ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } md:block md:w-1/4 h-screen w-3/4 bg-gradient-warm bg-side-bar-background md:pt-0 md:overflow-y-auto fixed md:static bg-cover z-40 transition-transform duration-300 lg:w-1/5 shadow-strong md:shadow-none`}
+        } md:block md:w-1/4 h-screen w-3/4 bg-gradient-warm bg-side-bar-background md:pt-0 md:overflow-y-auto fixed md:static bg-cover z-40 transition-transform duration-300 lg:w-1/5 shadow-strong md:shadow-none flex flex-col`}
       >
-        <div className="p-6 h-full flex flex-col">
+        <div className="p-6 h-full flex flex-col flex-1">
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <a href="/" className="flex items-center space-x-2 group">
@@ -183,7 +183,7 @@ const SideBar = () => {
           </div>
 
           {/* Quick Stats */}
-          <div className="mt-8 p-4 bg-white/80 rounded-xl backdrop-blur-sm">
+          <div className="mt-auto p-4 bg-white/80 rounded-xl backdrop-blur-sm">
             <h3 className="text-sm font-semibold text-neutral-700 mb-2">Quick Stats</h3>
             <div className="grid grid-cols-2 gap-2 text-xs text-neutral-600">
               <div className="flex items-center space-x-1">

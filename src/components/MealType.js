@@ -24,7 +24,7 @@ const FoodCategory = () => {
     { icon: AppetizerIcon, title: "Appetizer", color: "bg-gradient-secondary" },
     { icon: SaladIcon, title: "Salad", color: "bg-gradient-to-br from-green-400 to-green-600" },
     { icon: BreadIcon, title: "Bread", color: "bg-gradient-to-br from-amber-400 to-amber-600" },
-    { icon: BreakfastIcon, title: "Breakfast", color: "bg-gradient-to-br from-orange-400 to-orange-600", hidden: isHidden },
+    { icon: BreakfastIcon, title: "Breakfast", color: "bg-gradient-to-br from-orange-400 to-orange-600" },
     { icon: SoupIcon, title: "Soup", color: "bg-gradient-to-br from-red-400 to-red-600", hidden: isHidden },
     { icon: BeverageIcon, title: "Beverage", color: "bg-gradient-to-br from-blue-400 to-blue-600", hidden: isHidden },
     { icon: SauceIcon, title: "Sauce", color: "bg-gradient-to-br from-purple-400 to-purple-600", hidden: isHidden },
