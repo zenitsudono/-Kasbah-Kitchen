@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/-Kasbah-Kitchen/static/css/main.1b95780d.css",
+    "main.js": "/-Kasbah-Kitchen/static/js/main.22ded505.js",
+    "static/js/787.cf936f8f.chunk.js": "/-Kasbah-Kitchen/static/js/787.cf936f8f.chunk.js",
+    "static/media/HeroBackground.jpg": "/-Kasbah-Kitchen/static/media/HeroBackground.caf0f6611b8dc9659052.jpg",
+    "static/media/loading.gif": "/-Kasbah-Kitchen/static/media/loading.d6c39845ada5e7086439.gif",
+    "static/media/soup.png": "/-Kasbah-Kitchen/static/media/soup.dacdb98e3b7145adfe64.png",
+    "static/media/sauce.png": "/-Kasbah-Kitchen/static/media/sauce.df87631122228b545dbc.png",
+    "static/media/salad.png": "/-Kasbah-Kitchen/static/media/salad.41d8c7504b51ac14239f.png",
+    "static/media/bread.png": "/-Kasbah-Kitchen/static/media/bread.3e2607fcd7cea71a7142.png",
+    "static/media/dinner.png": "/-Kasbah-Kitchen/static/media/dinner.bee07df47a7ab84792f8.png",
+    "static/media/drink.png": "/-Kasbah-Kitchen/static/media/drink.fa11ec00fca754df30b3.png",
+    "static/media/snack.png": "/-Kasbah-Kitchen/static/media/snack.d2a258550f23662ebc3e.png",
+    "static/media/beverage.png": "/-Kasbah-Kitchen/static/media/beverage.b7b76c90e6cca887225c.png",
+    "static/media/marinade.png": "/-Kasbah-Kitchen/static/media/marinade.a90cffa9153f4891e4eb.png",
+    "static/media/breakfast.png": "/-Kasbah-Kitchen/static/media/breakfast.cfba1a34fb66dc1726cd.png",
+    "static/media/dessert.png": "/-Kasbah-Kitchen/static/media/dessert.76c9d4812de0e98daa4f.png",
+    "static/media/appetizer.png": "/-Kasbah-Kitchen/static/media/appetizer.44789447db7e8976a9f1.png",
+    "index.html": "/-Kasbah-Kitchen/index.html",
+    "main.1b95780d.css.map": "/-Kasbah-Kitchen/static/css/main.1b95780d.css.map",
+    "main.22ded505.js.map": "/-Kasbah-Kitchen/static/js/main.22ded505.js.map",
+    "787.cf936f8f.chunk.js.map": "/-Kasbah-Kitchen/static/js/787.cf936f8f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1b95780d.css",
+    "static/js/main.22ded505.js"
+  ]
+}
