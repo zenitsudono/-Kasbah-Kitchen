@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/-Kasbah-Kitchen/static/css/main.1b95780d.css",
-    "main.js": "/-Kasbah-Kitchen/static/js/main.22ded505.js",
+    "main.js": "/-Kasbah-Kitchen/static/js/main.f59a7052.js",
     "static/js/787.cf936f8f.chunk.js": "/-Kasbah-Kitchen/static/js/787.cf936f8f.chunk.js",
     "static/media/HeroBackground.jpg": "/-Kasbah-Kitchen/static/media/HeroBackground.caf0f6611b8dc9659052.jpg",
     "static/media/loading.gif": "/-Kasbah-Kitchen/static/media/loading.d6c39845ada5e7086439.gif",
@@ -19,11 +19,11 @@
     "static/media/appetizer.png": "/-Kasbah-Kitchen/static/media/appetizer.44789447db7e8976a9f1.png",
     "index.html": "/-Kasbah-Kitchen/index.html",
     "main.1b95780d.css.map": "/-Kasbah-Kitchen/static/css/main.1b95780d.css.map",
-    "main.22ded505.js.map": "/-Kasbah-Kitchen/static/js/main.22ded505.js.map",
+    "main.f59a7052.js.map": "/-Kasbah-Kitchen/static/js/main.f59a7052.js.map",
     "787.cf936f8f.chunk.js.map": "/-Kasbah-Kitchen/static/js/787.cf936f8f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1b95780d.css",
-    "static/js/main.22ded505.js"
+    "static/js/main.f59a7052.js"
   ]
 }
