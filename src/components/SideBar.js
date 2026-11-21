@@ -1,12 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
 
 const SideBar = () => {
   const [isShow, setIsShow] = useState(false);
   const { keyword, mealType } = useParams();
-  const [searchTerm, setSearchTerm] = useState(keyword);
-
+  const [searchTerm, setSearchTerm] = useState(keyword === "random" ? "" : keyword || "");
+  const { favoritesCount } = useFavorites();
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -15,7 +15,9 @@ const SideBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${searchTerm}/${mealType}`);
+    const query = searchTerm.trim() || "random";
+    navigate(`/search/${encodeURIComponent(query)}/${mealType || "all"}`);
+    setIsShow(false);
   };
 
   const mealTypes = [
@@ -35,28 +37,19 @@ const SideBar = () => {
     "Drink",
   ];
 
-  const mealTypeBadge = ({ name, onClick }) => {
-    const isActive = mealType === name.toLowerCase();
-    return (
-      <button
-        onClick={onClick}
-        className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-          isActive
-            ? "bg-gradient-primary text-white shadow-medium"
-            : "bg-white/80 text-neutral-700 hover:bg-white hover:shadow-soft"
-        }`}
-      >
-        {name}
-      </button>
-    );
+  const handleCategoryClick = (type) => {
+    const currentKeyword = searchTerm.trim() || keyword || "random";
+    navigate(`/search/${encodeURIComponent(currentKeyword)}/${type.toLowerCase()}`);
+    setIsShow(false);
   };
 
   return (
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="fixed right-5 top-20 md:hidden block z-50 btn-ghost p-3"
+        className="fixed right-5 top-20 md:hidden block z-50 btn-ghost p-3 shadow-medium"
         onClick={() => setIsShow(!isShow)}
+        aria-label="Toggle Categories"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -66,146 +59,141 @@ const SideBar = () => {
           stroke="currentColor"
         >
           {isShow ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           )}
         </svg>
       </button>
 
       {/* Sidebar */}
-      <div
+      <aside
         className={`${
           isShow ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } md:block md:w-1/4 h-screen w-3/4 bg-gradient-warm bg-side-bar-background md:pt-0 md:overflow-y-auto fixed md:static bg-cover z-40 transition-transform duration-300 lg:w-1/5 shadow-strong md:shadow-none flex flex-col`}
+        } md:block md:w-72 lg:w-80 h-screen bg-white border-r border-neutral-200/80 fixed md:sticky top-0 z-40 transition-transform duration-300 shadow-strong md:shadow-none flex flex-col overflow-y-auto`}
       >
-        <div className="p-6 h-full flex flex-col flex-1">
-          {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <a href="/" className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-300">
+        <div className="p-6 flex flex-col flex-1">
+          {/* Brand */}
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-neutral-100">
+            <Link to="/" className="flex items-center space-x-2.5 group">
+              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow group-hover:scale-105 transition-transform duration-300">
                 <span className="text-white font-bold text-lg">K</span>
               </div>
-              <span className="text-2xl font-display font-bold text-gradient">
+              <span className="text-xl font-display font-extrabold text-gradient">
                 Kasbah Kitchen
               </span>
-            </a>
+            </Link>
           </div>
 
-          {/* Search Bar */}
-          <div className="mb-8">
-            <form onSubmit={handleSubmit}>
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-primary rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-soft">
-                  <input
-                    type="text"
-                    className="w-full bg-transparent outline-none text-neutral-800 text-lg placeholder-neutral-500"
-                    placeholder="Find Recipes"
-                    value={searchTerm === "random" ? "" : searchTerm}
-                    onChange={handleInputChange}
-                    required
-                  />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-5 h-5 text-neutral-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          {/* Meal Types */}
-          <div className="flex-1">
-            <h2 className="text-lg font-display font-bold text-neutral-800 mb-6 flex items-center">
+          {/* Search Form */}
+          <form onSubmit={handleSubmit} className="mb-6">
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full bg-neutral-100/80 border border-neutral-200 rounded-2xl py-2.5 pl-10 pr-4 text-sm text-neutral-800 placeholder-neutral-400 outline-none focus:bg-white focus:border-primary-500 transition-all"
+                placeholder="Search recipe..."
+                value={searchTerm}
+                onChange={handleInputChange}
+              />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 text-neutral-400 absolute left-3.5 top-3"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={2}
                 stroke="currentColor"
-                className="w-5 h-5 mr-2 text-primary-600"
+                strokeWidth={2}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 6h.008v.008H6V6z"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              Meal Categories
-            </h2>
-
-            <div className="space-y-3">
-              {mealTypes.map((mealTypeName) => (
-                <div key={mealTypeName}>
-                  {mealTypeBadge({
-                    name: mealTypeName,
-                    onClick: () =>
-                      navigate(`/search/${keyword}/${mealTypeName.toLowerCase()}`),
-                  })}
-                </div>
-              ))}
-              
-              <div className="pt-2">
-                {mealTypeBadge({
-                  name: "All Categories",
-                  onClick: () => navigate(`/search/${keyword}/all`),
-                })}
-              </div>
             </div>
+          </form>
+
+          {/* Quick Nav Links */}
+          <div className="space-y-1.5 mb-6 pb-6 border-b border-neutral-100">
+            <Link
+              to="/"
+              className="flex items-center space-x-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-neutral-700 hover:bg-neutral-100 transition-colors"
+            >
+              <span>🏠</span>
+              <span>Home</span>
+            </Link>
+            <Link
+              to="/favorites"
+              className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-neutral-700 hover:bg-neutral-100 transition-colors"
+            >
+              <div className="flex items-center space-x-2.5">
+                <span>❤️</span>
+                <span>Saved Recipes</span>
+              </div>
+              {favoritesCount > 0 && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500 text-white">
+                  {favoritesCount}
+                </span>
+              )}
+            </Link>
+            <Link
+              to="/about"
+              className="flex items-center space-x-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-neutral-700 hover:bg-neutral-100 transition-colors"
+            >
+              <span>✨</span>
+              <span>About Kasbah</span>
+            </Link>
           </div>
 
-          {/* Quick Stats */}
-          <div className="mt-auto p-4 bg-white/80 rounded-xl backdrop-blur-sm">
-            <h3 className="text-sm font-semibold text-neutral-700 mb-2">Quick Stats</h3>
-            <div className="grid grid-cols-2 gap-2 text-xs text-neutral-600">
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                <span>Popular</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
-                <span>Healthy</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
-                <span>Quick</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                <span>Trending</span>
-              </div>
+          {/* Categories */}
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-3 px-1">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+                Meal Categories
+              </h2>
+              {mealType && mealType !== "all" && (
+                <button
+                  onClick={() => handleCategoryClick("all")}
+                  className="text-[11px] text-primary-600 font-semibold hover:underline"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-1">
+              <button
+                onClick={() => handleCategoryClick("all")}
+                className={`w-full text-left px-3.5 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between ${
+                  !mealType || mealType === "all"
+                    ? "bg-primary-50 text-primary-600 font-bold"
+                    : "text-neutral-600 hover:bg-neutral-100"
+                }`}
+              >
+                <span>All Categories</span>
+                {(!mealType || mealType === "all") && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                )}
+              </button>
+
+              {mealTypes.map((type) => {
+                const isActive = mealType === type.toLowerCase();
+                return (
+                  <button
+                    key={type}
+                    onClick={() => handleCategoryClick(type)}
+                    className={`w-full text-left px-3.5 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between ${
+                      isActive
+                        ? "bg-primary-50 text-primary-600 font-bold"
+                        : "text-neutral-600 hover:bg-neutral-100"
+                    }`}
+                  >
+                    <span>{type}</span>
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 };
